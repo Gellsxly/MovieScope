@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Recommendation | MovieScope</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- ======== NAVBAR ======== -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="logo">🎬 MovieScope</div>
+      <ul class="nav-links">
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('recommendation') }}">Recommendation</a></li>
+        <li><a href="{{ url_for('smart_recommendation') }}" class="active">Smart Mode</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ======== SMART RECOMMENDATION ======== -->
+  <section class="recommendation-section">
+    <h1>🎯 Smart Movie Recommendations</h1>
+    <p>
+      Menampilkan film trending dengan rating tinggi secara otomatis.
+      Tidak perlu memilih — sistem menyeleksi film terbaik minggu ini untukmu!
+    </p>
+
+    {% if movies %}
+      <div class="movie-grid">
+        {% for movie in movies %}
+        <div class="movie-card">
+        <img
+            class="movie-poster"
+            src="{{ movie.poster if movie.poster else 'https://via.placeholder.com/500x750?text=No+Image' }}"
+            alt="{{ movie.title }}"/>
+
+          <div class="movie-info">
+            <h3>{{ movie.title }}</h3>
+            <p class="rating">⭐ {{ movie.vote_average }}</p>
+            <p class="overview">{{ movie.overview[:150] }}...</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="no-results">Tidak ada film yang ditemukan 😢</p>
+    {% endif %}
+  </section>
+
+  <!-- ======== FOOTER (ABOUT ME) ======== -->
+  <footer id="about-me" class="fade-in">
+    <div class="footer-container">
+      <div class="about-me">
+        <img src="{{ url_for('static', filename='Ganteng.jpg') }}" alt="Profile Photo" class="profile-img">
+        <div class="bio">
+          <h3>About Me</h3>
+          <p>Halo! Saya Rigel, seorang mahasiswa prodi teknologi informasi yang antusias dalam melaksanakan project akhir pembuatan website. 
+            Saya membuat MovieScope sebagai proyek pembelajaran sekaligus eksplorasi API film dunia 🌍.</p>
+
+          <div class="contact-info">
+            <p><b>Contact:</b> <a href="mailto:rigelammarusshidqi42@gmail.com">rigelammarusshidqi42@gmail.com</a></p>
+            <p><b>Instagram:</b> <a href="https://instagram.com/gellvibes_" target="_blank">@gellvibes_</a></p>
+            <p><b>Address:</b> Yogyakarta, Indonesia</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="footer-note">© 2025 MovieScope | Built with Flask and TMDB API</p>
+    </div>
+  </footer>
+
+</body>
+</html>

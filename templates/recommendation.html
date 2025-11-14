@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title or 'Movie Recommendations' }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="logo">🎬 MovieScope</div>
+        <ul class="nav-links">
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li><a href="{{ url_for('recommendation') }}" class="active">Recommendation</a></li>
+          <li><a href="{{ url_for('smart_recommendation') }}">Smart Mode</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ===== RECOMMENDATION SECTION ===== -->
+    <section class="recommendation-section">
+      <div class="section-header">
+        <h1>🎥 Movie Recommendations</h1>
+        <p>Temukan film terbaik sesuai selera kamu berdasarkan genre dan rating minimum.</p>
+      </div>
+
+      <!-- ===== FILTER FORM ===== -->
+      <form method="POST" class="filter-form">
+        <div class="filter-container">
+          <div class="filter-group">
+            <label for="genre">Genre:</label>
+            <select name="genre" id="genre" class="form-select">
+              <option value="all">All</option>
+              {% for genre in genres %}
+              <option value="{{ genre.id }}">{{ genre.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="rating">Minimum Rating:</label>
+            <input
+              type="number"
+              step="0.1"
+              name="rating"
+              id="rating"
+              class="form-input"
+              placeholder="Ex: 7.0"
+              min="0"
+              max="10"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">🔍 Search</button>
+        </div>
+      </form>
+
+      <!-- ===== PESAN DINAMIS ===== -->
+      {% if message %}
+      <p class="result-message">{{ message }}</p>
+      {% endif %}
+
+      <!-- ===== MOVIE GRID ===== -->
+      {% if movies %}
+      <div class="movie-grid">
+        {% for movie in movies %}
+        <div class="movie-card">
+          <div class="poster-wrapper">
+            <img src="{{ movie.poster }}" alt="{{ movie.title }}" class="movie-poster" />
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">{{ movie.title }}</h3>
+            <p class="movie-rating">⭐ {{ movie.rating }}</p>
+            <p class="movie-overview">{{ movie.overview }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="no-results">Belum ada hasil pencarian. Silakan pilih filter di atas.</p>
+      {% endif %}
+    </section>
+  </body>
+</html>
