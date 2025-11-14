@@ -1,32 +1,23 @@
-# ---- Python ----
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
 *.pyd
-*.pkl
 
-# ---- Environment ----
-.env
+# Virtual environment
 venv/
-.venv/
+env/
 
-# ---- Flask ----
-instance/
-*.db
-*.sqlite3
+# Environment variables
+.env
 
-# ---- OS Files ----
-.DS_Store
-Thumbs.db
-
-# ---- VSCode ----
+# VSCode
 .vscode/
 
-# ---- Logs ----
+# Flask cache
+instance/
+
+# Compiled
 *.log
-
-# ---- Compiled ----
-*.so
-
-# ---- Cache ----
-.cache/
+*.sqlite
+*.db
