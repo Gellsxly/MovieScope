@@ -316,8 +316,6 @@ footer {
   font-size: 0.9em;
   color: #b8c3d6;
   line-height: 1.4;
-  max-height: 80px;
-  overflow: hidden;
 }
 
 .no-results {
@@ -403,3 +401,47 @@ footer {
 .para-gap {
   margin-bottom: 20px; /* boleh diganti 30px/40px sesuai kebutuhan */
 }
+
+/* Mode ringkas (3 baris) */
+.overview.short {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* Mode terbuka penuh */
+.overview.expanded {
+  overflow: visible;
+  max-height: none;
+  display: block;
+}
+
+
+/* Tombol baca selengkapnya */
+.read-more-btn {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: #00c6ff;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.read-more-btn:hover {
+  color: #1e90ff;
+}
+
+/* Card mengikuti tinggi isi secara otomatis */
+.movie-card {
+  height: auto !important;
+  min-height: 420px;
+}
+
+/* Bagian info film agar bisa memanjang */
+.movie-info {
+  height: auto !important;
+}
+

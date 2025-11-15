@@ -32,7 +32,8 @@
       <div class="movie-grid">
         {% for movie in movies %}
         <div class="movie-card">
-        <img
+
+          <img
             class="movie-poster"
             src="{{ movie.poster if movie.poster else 'https://via.placeholder.com/500x750?text=No+Image' }}"
             alt="{{ movie.title }}"/>
@@ -40,7 +41,17 @@
           <div class="movie-info">
             <h3>{{ movie.title }}</h3>
             <p class="rating">⭐ {{ movie.vote_average }}</p>
-            <p class="overview">{{ movie.overview[:150] }}...</p>
+
+            <!-- SINOPSIS DIPOTONG -->
+            <p class="overview short">
+              {{ movie.overview }}
+            </p>
+
+            <!-- TOMBOL BACA SELENGKAPNYA -->
+            <button class="read-more-btn" onclick="toggleReadMore(this)">
+              Baca selengkapnya
+            </button>
+
           </div>
         </div>
         {% endfor %}
@@ -71,6 +82,23 @@
       <p class="footer-note">© 2025 MovieScope | Built with Flask and TMDB API</p>
     </div>
   </footer>
+
+  <!-- ====== JAVASCRIPT UNTUK "BACA SELENGKAPNYA" ====== -->
+  <script>
+    function toggleReadMore(button) {
+      const overview = button.previousElementSibling;
+
+      if (overview.classList.contains("short")) {
+        overview.classList.remove("short");
+        overview.classList.add("expanded");
+        button.textContent = "Tutup";
+      } else {
+        overview.classList.remove("expanded");
+        overview.classList.add("short");
+        button.textContent = "Baca selengkapnya";
+      }
+    }
+  </script>
 
 </body>
 </html>
